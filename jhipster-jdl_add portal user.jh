@@ -1,0 +1,135 @@
+
+DEFAULT_MAX_LENGTH = 64
+
+entity Location {
+	name String required maxlength(DEFAULT_MAX_LENGTH),
+	uid String required maxlength(DEFAULT_MAX_LENGTH),
+    longitude Float required,
+    latitude Float required,
+    note TextBlob
+}
+
+enum DeviceRole {
+	GATEWAY,
+    ACCESSPOINT
+}
+
+entity Device {
+	name String required maxlength(DEFAULT_MAX_LENGTH),
+    uid String required maxlength(DEFAULT_MAX_LENGTH),
+	role DeviceRole,
+    mac String,
+    model String required maxlength(DEFAULT_MAX_LENGTH),
+    checksum String required maxlength(DEFAULT_MAX_LENGTH),
+    fw String required maxlength(DEFAULT_MAX_LENGTH),
+    note TextBlob
+}
+
+relationship ManyToOne {
+	Device{location(name)} to Location{device}
+}
+
+entity Network {
+	name String required maxlength(DEFAULT_MAX_LENGTH),
+    ip String required maxlength(DEFAULT_MAX_LENGTH),
+    start Integer,
+    limit Integer,
+    leaseTime Integer,
+    bandwidth Integer,
+    vlanId Integer
+}
+
+entity Wireless {
+	ssid String required maxlength(DEFAULT_MAX_LENGTH),
+    encryption String required maxlength(DEFAULT_MAX_LENGTH),
+    key String required maxlength(DEFAULT_MAX_LENGTH),
+    maxAssoc Integer,
+    maxInactivity Integer,
+    disabled Boolean
+}
+
+enum WirelessType {
+	BAND24G,
+    BAND50G
+}
+
+entity WirelessDevice {
+	channel String required maxlength(DEFAULT_MAX_LENGTH),
+    htmode String required maxlength(DEFAULT_MAX_LENGTH),
+    type WirelessType
+}
+
+relationship ManyToOne {
+	Wireless{network} to Network
+}
+
+relationship OneToMany {
+	Device{network} to Network
+    Device{wirelessDevice} to WirelessDevice
+}
+
+relationship OneToMany {
+	WirelessDevice{wireless} to Wireless
+}
+
+relationship ManyToMany {
+  SplashPage{loginType(name)} to LoginType
+}
+
+entity LoginType {
+  name String
+}
+entity SplashPage {
+	name String
+}
+
+entity DetailSplashPage {
+  value String
+}
+entity Theme {	
+  name String,
+  htmlFile String
+}
+
+entity PortalUser{
+  login String,
+  firstname String,
+  lastname String,
+  email String,
+  imageurl String,
+  profileurl String,
+  createdBy String,
+  createdDate LocalDate,
+  lastModifiedBy String,
+  lastModifiedDate LocalDate
+}
+enum FieldDataType { TEXT, IMAGE }
+entity FieldName {
+  name String,
+  type FieldDataType
+}
+relationship ManyToOne {
+	Network{splashPage} to SplashPage
+    SplashPage{theme} to Theme,
+  	DetailSplashPage{splashPage(name)} to SplashPage,
+  	DetailSplashPage{fieldName(name)} to FieldName,
+  	FieldName{theme(name)} to Theme{field(name)},
+  	PortalUser{loginType(name)} to LoginType,
+  	LoginActivity{portalUser(login)} to PortalUser,
+  	LoginActivity{accessPoint(name)} to Device
+}
+
+entity Organization {
+	name String,
+	address String
+}
+
+entity LoginActivity{
+  createdDate LocalDate,
+}
+
+relationship ManyToOne {
+	Location{organization} to Organization
+    Network{organization} to Organization
+    Wireless{organization} to Organization
+}
