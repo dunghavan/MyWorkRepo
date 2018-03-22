@@ -1,0 +1,51 @@
+-------------------- AccessPoint---------------------
+
+// Get AccessPoint serial
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -d '{"mac":"11:22:33:44:55:66", "model":"TP-Link TL-WR941N/ND v6", "fw":"v123"}' http://localhost:8080/api/access-points/serial
+{
+  "serial" : "964b75653253fa82a536805c91b6c852f9d78d52",
+  "mac" : "11:22:33:44:55:66",
+  "model" : "TP-Link TL-WR941N/ND v6",
+  "activationKey" : null,
+  "fw" : "v123"
+}
+
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -d '{"mac":"66:55:44:33:22:11", "model":"TP-Link TL-WR941N/ND v6", "fw":"v123"}' http://localhost:8080/api/access-points/serial
+
+
+
+// Dang ky den khi lay duoc token cho AccessPoint
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -d '{"mac":"11:22:33:44:55:66", "model":"TP-Link TL-WR941N/ND v6","serial":"964b75653253fa82a536805c91b6c852f9d78d52", "fw": "v123"}' http://localhost:8080/api/access-points/register
+{
+  "id_token" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiI5NjRiNzU2NTMyNTNmYTgyYTUzNjgwNWM5MWI2Yzg1MmY5ZDc4ZDUyIiwiYWN0IjoiNjE4MTY2NDE2MzczMjAxOTE2NTQiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.7-59Y7fK7pnQQ0k0FYS9g3tpFj9BnEX96O58tsSHQ_Q"
+}
+
+// Ping
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiI5NjRiNzU2NTMyNTNmYTgyYTUzNjgwNWM5MWI2Yzg1MmY5ZDc4ZDUyIiwiYWN0IjoiNjE4MTY2NDE2MzczMjAxOTE2NTQiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.7-59Y7fK7pnQQ0k0FYS9g3tpFj9BnEX96O58tsSHQ_Q" http://localhost:8080/api/access-points/ping
+
+// Post data to /api/stats/access-points/client with new Model (has 9 clients)
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiI5NjRiNzU2NTMyNTNmYTgyYTUzNjgwNWM5MWI2Yzg1MmY5ZDc4ZDUyIiwiYWN0IjoiNjE4MTY2NDE2MzczMjAxOTE2NTQiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.7-59Y7fK7pnQQ0k0FYS9g3tpFj9BnEX96O58tsSHQ_Q" -d '{"devices":[{"device":"wlan0","clients":[{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}}]},{"device":"wlan1","clients":[{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}},{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}}]}]}' http://localhost:8080/api/stats/access-points/client
+
+// Post data to /api/stats/access-points/client with new Model (has 1 clients)
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiI5NjRiNzU2NTMyNTNmYTgyYTUzNjgwNWM5MWI2Yzg1MmY5ZDc4ZDUyIiwiYWN0IjoiNjE4MTY2NDE2MzczMjAxOTE2NTQiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.7-59Y7fK7pnQQ0k0FYS9g3tpFj9BnEX96O58tsSHQ_Q" -d '{"devices":[{"device":"wlan0","clients":[{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}}]}]}' http://localhost:8080/api/stats/access-points/client
+
+// Post data to /api/stats/access-point/client with has 1 client (AccessPoint 2)
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiJmZjY0YzkxOTM1NTAyMTViYTBkM2FlY2JiMjIzMTBlYTU4ZjU2MTIzIiwiYWN0IjoiNjAwNzQxMzQzNDk0NTMxNDcyNjciLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.kn_CEb1SKfEvPw9cociFQSQ9Gx4QDosd4rPBX9A7CtY" -d '{"devices":[{"device":"wlan0","clients":[{"mac":"C4:B3:01:D0:0F:9D","signal":-27,"noise":0,"inactive":10,"rxbyte":2068920,"rx":{"rate":144400,"mcs":15,"40mhz":false,"short_gi":true},"txbyte":3333133,"tx":{"rate":104000,"mcs":13,"40mhz":false,"short_gi":false}}]}]}' http://localhost:8080/api/stats/access-points/client
+
+-------------------------------- Gateway----------------------
+
+
+// Get Gateway serial
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-gw" -d '{"mac":"AA:22:BB:44:55:CC", "model":"TP-Link TL-WR941N/ND v6", "fw":"v456"}' http://localhost:8080/api/gateways/serial
+
+
+// Dang ky den khi lay duoc token cho Gateway
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-gw" -d '{"mac":"AA:22:BB:44:55:CC", "model":"TP-Link TL-WR941N/ND v6","serial":"d53033060bc2c1a0812633c1baea95da85f813cb", "fw": "v456"}' http://localhost:8080/api/gateways/register
+
+// Ping
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-gw" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiJkNTMwMzMwNjBiYzJjMWEwODEyNjMzYzFiYWVhOTVkYTg1ZjgxM2NiIiwiYWN0IjoiOTYwNTM2NDIxMDY2OTYzNjY0OTYiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9HQVRFV0FZIn0.2AZPikgQL7-5meIrJLhHeovvwuvWXMWMm1h6mm2z-Fc" http://localhost:8080/api/gateways/ping
+
+
+
+	TP-Link TL-WR941N/ND v6
+	TP-Link Archer C50 v3
