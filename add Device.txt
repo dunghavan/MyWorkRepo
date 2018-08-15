@@ -1,0 +1,11 @@
+add Device
+
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -d '{"mac":"70:4F:57:A4:7C:1B", "model":"TP-Link TL-WR940N v4","serial":"7bd4d9cc84a88b70a64e67ceffa85375eb7626e2", "fw": "123Wifi-ap 1.0.1", "sig": "80f5bfe1b780ff7cf7511335475dd01f"}' http://localhost:8080/api/access-points/register
+
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-ap" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiI3YmQ0ZDljYzg0YTg4YjcwYTY0ZTY3Y2VmZmE4NTM3NWViNzYyNmUyIiwiYWN0IjoiOTk5NTQ4NjQ5MDA4Mjg5OTkxNjEiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9BQ0NFU1NfUE9JTlQifQ.y8pPaU1nhhJJ20fcZkWclPqMR5_-ZrfdRclcRGjEV7w" http://localhost:8080/api/access-points/ping
+
+
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-gw" -d '{"mac":"18:A6:F7:9D:A0:40", "model":"TP-Link TL-WR1043N/ND v3","serial":"b29b1bb03b2f3f9665bbe2dd7ce656b33439154d", "fw": "OpenWrt CSMRouter Aleph Cloud 1.0", "sig": "8f2acdcb69cb7a528ea5a01c5578639e"}' http://localhost:8080/api/gateways/register
+
+curl -X POST -H "Content-Type: application/json" -H "User-Agent: X-123WifiApp-gw" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZpY2VfYXV0aCIsInNlcmkiOiJiMjliMWJiMDNiMmYzZjk2NjViYmUyZGQ3Y2U2NTZiMzM0MzkxNTRkIiwiYWN0IjoiMDc0MjI3MDA3NDQ3ODc2MDcyMjMiLCJvcmciOjEsImF1dGgiOiJST0xFX0RFVklDRV9HQVRFV0FZIn0.DKiJQ8j3PQW1QO1IKRHg400e8InqXkjiIpaMDEM4DFc" http://localhost:8080/api/gateways/ping
+

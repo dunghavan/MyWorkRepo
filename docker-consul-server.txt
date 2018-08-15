@@ -1,0 +1,6 @@
+docker run -d -h consul-node1 --net=mynet --ip=172.18.0.100 --name=consul-node1 consul agent -server -bootstrap-expect 3 -ui -client 0.0.0.0
+docker run -d -h consul-node2 --net=mynet --ip=172.18.0.101 --name=consul-node2 consul agent -server -join 172.18.0.100 -ui -client 0.0.0.0
+docker run -d -h consul-node3 --net=mynet --ip=172.18.0.102 --name=consul-node3 consul agent -server -join 172.18.0.100 -ui -client 0.0.0.0
+docker run -d -h consul-node4 --net=mynet --ip=172.18.0.103 --name=consul-node4 consul agent -server -join 172.18.0.100 -ui -client 0.0.0.0
+
+docker run -d -h consul-node1 --name=consul-node1 consul agent -server -bootstrap-expect 3 -ui -client 0.0.0.0
