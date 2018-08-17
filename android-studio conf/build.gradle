@@ -1,0 +1,51 @@
+group 'io.flutter.plugins.videoplayer'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    dependencies {
+//        implementation 'com.google.android.exoplayer:exoplayer-core:2.8.0'
+//        implementation 'com.google.android.exoplayer:exoplayer-hls:2.8.0'
+//        implementation 'com.google.android.exoplayer:exoplayer-dash:2.8.0'
+//        implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.8.0'
+//        implementation 'com.google.android.exoplayer:extension-rtmp:2.8.0'
+
+        implementation project(':exoplayer-library-core')
+        implementation project(':exoplayer-library-dash')
+        implementation project(':exoplayer-library-ui')
+        implementation project(':exoplayer-library-hls')
+        implementation project(':exoplayer-library-smoothstreaming')
+
+        implementation project(':exoplayer-extension-rtmp')
+        //compile project(path: ':exoplayer-extension-rtmp')
+    }
+}
